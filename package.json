@@ -1,0 +1,40 @@
+{
+  "name": "admin-app",
+  "version": "1.0.0",
+  "description": "Manager app for the intekglobal app ecosystem",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
+    "lint": "eslint 'src/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RodrigoPJ/admin-app.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "typescript",
+    "mongo"
+  ],
+  "author": "intekglobal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RodrigoPJ/admin-app/issues"
+  },
+  "homepage": "https://github.com/RodrigoPJ/admin-app",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.29",
+    "eslint": "^9.28.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
