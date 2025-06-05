@@ -34,13 +34,15 @@ Manager app for the IntekGlobal app ecosystem. This service exposes a simple RES
 
 ## Installation
 
-1. Clone the repository and navigate into the project folder:  
+1. Clone the repository and navigate into the project folder:
+
    ```bash
    git clone https://github.com/RodrigoPJ/admin-app.git
    cd admin-app
    ```
 
-2. Install dependencies:  
+2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -53,7 +55,7 @@ Manager app for the IntekGlobal app ecosystem. This service exposes a simple RES
 
 Copy `.env.example` (if provided) or create a new `.env` at the root with the following variables:
 
-```
+``` bash
 MONGO_URI=mongodb://127.0.0.1:27017/admin-app-db
 PORT=3000
 ```
@@ -75,22 +77,28 @@ This will compile and run `src/server.ts`, watch for changes in `src/**/*.ts`, a
 
 - **Production / Build**:  
   1. Build the TypeScript files into JavaScript (output goes to `dist/`):
-  
+
      ```bash
      npm run build
-     ```  
-  2. Start the compiled server:  
+     ```
+
+  2. Start the compiled server:
+
      ```bash
      npm start
-     ```  
+     ```
+
   The server will listen on the port defined in `process.env.PORT` (default 3000 if not set).
 
-Once the server is up, you can verify it’s running by visiting:  
-```
+Once the server is up, you can verify it’s running by visiting:
+
+```bash
 http://localhost:<PORT>/
 ```  
+
 You should see a blank response (no root endpoint defined), but the console will say:
-```
+
+```text
 Server running on port <PORT>
 Mongoose connected to: <your MongoURI>
 ```
@@ -99,7 +107,7 @@ Mongoose connected to: <your MongoURI>
 
 ## Project Structure
 
-```
+```bash
 admin-app/
 ├── src/
 │   ├── app.ts
@@ -195,7 +203,7 @@ Handlers consult this to determine which UI components a given role is allowed t
 
 All endpoints use **JSON** and assume the server is running at:
 
-```
+```text
 http://localhost:<PORT>
 ```
 
@@ -234,6 +242,7 @@ http://localhost:<PORT>
       }
     ]
     ```
+
 - **Error Response**:  
   - **Code**: `400 Bad Request`  
   - **Reason**: Missing or invalid `user` query parameter.
@@ -243,15 +252,18 @@ http://localhost:<PORT>
 ### GET /roles
 
 - **Description**: Returns a list of all role names defined in `components`.  
-- **URL**:  
-  ```
+- **URL**:
+
+  ```html
   GET /roles?user=<email>
-  ```  
+  ```
+
 - **Query Parameters**:  
   - `user` (_string_, **required**) – the email of the requesting user.  
 - **Success Response**:  
   - **Code**: `200 OK`  
-  - **Content**: A JSON array `[ requestedUserEmail, "comp2", rolesArray ]`  
+  - **Content**: A JSON array `[ requestedUserEmail, "comp2", rolesArray ]`
+
     ```jsonc
     [
       "alice@example.com",
@@ -259,6 +271,7 @@ http://localhost:<PORT>
       ["admin", "viewer", "editor"]
     ]
     ```
+
 - **Error Response**:  
   - **Code**: `400 Bad Request`  
   - **Reason**: Missing or invalid `user` query parameter.
@@ -268,16 +281,19 @@ http://localhost:<PORT>
 ### GET /users
 
 - **Description**: Retrieves all users in the database.  
-- **URL**:  
-  ```
+- **URL**:
+
+  ```html
   GET /users?user=<email>
-  ```  
+  ```
+
 - **Query Parameters**:  
   - `user` (_string_, **required**) – the email of the requesting user.  
 - **Success Response**:  
   - **Code**: `200 OK`  
   - **Content**: A JSON array `[ requestedUserEmail, "comp2", allUsers ]`  
-    - `allUsers` is an array of user documents (each with fields `_id`, `firstName`, `lastName`, `email`, `roles`, `managedUsers`, `createdAt`, `updatedAt`).  
+    - `allUsers` is an array of user documents (each with fields `_id`, `firstName`, `lastName`, `email`, `roles`, `managedUsers`, `createdAt`, `updatedAt`).
+
     ```jsonc
     [
       "alice@example.com",
@@ -310,6 +326,7 @@ http://localhost:<PORT>
       ]
     ]
     ```
+
 - **Error Response**:  
   - **Code**: `400 Bad Request`  
   - **Reason**: Missing `user` query parameter.
@@ -319,15 +336,18 @@ http://localhost:<PORT>
 ### GET /user
 
 - **Description**: Retrieves a single user’s profile along with computed “userComponents” array.  
-- **URL**:  
-  ```
+- **URL**:
+
+  ```html
   GET /user?user=<email>
-  ```  
+  ```
+
 - **Query Parameters**:  
   - `user` (_string_, **required**) – the email of the user to look up.  
 - **Success Response**:  
   - **Code**: `200 OK`  
   - **Content**: An object merging the user document fields plus a `userComponents` array containing all component keys that user’s roles allow. Example response:
+
     ```jsonc
     {
       "_id": "64f8a1e5dcd8a8b570a4284b",
@@ -347,6 +367,7 @@ http://localhost:<PORT>
       ]
     }
     ```
+
     - Here, because `roles: ["editor"]`, the code looks up `components["editor"]` (which is `["read-users-sms-app", "write-users-admin-app", "read-messages"]`) and returns it as `userComponents`.
 - **Error Responses**:  
   - **Code**: `400 Bad Request`  
@@ -358,11 +379,14 @@ http://localhost:<PORT>
 ### POST /role
 
 - **Description**: Creates a new role in the database.  
-- **URL**:  
-  ```
+- **URL**:
+
+  ```html
   POST /role
-  ```  
-- **Request Body** (JSON):  
+  ```
+
+- **Request Body** (JSON):
+
   ```jsonc
   {
     "name": "editor",
@@ -373,11 +397,13 @@ http://localhost:<PORT>
     ]
   }
   ```
+
   - `name` (_string_, required) – the role name (e.g. `"admin"`, `"viewer"`, `"editor"`).  
   - `components` (_string[]_, required) – array of allowed component keys.  
 - **Success Response**:  
   - **Code**: `200 OK`  
   - **Content**: The saved `Role` document:
+
     ```jsonc
     {
       "_id": "64f8a2f8dcd8a8b570a4284d",
@@ -392,6 +418,7 @@ http://localhost:<PORT>
       "__v": 0
     }
     ```
+
 - **Error Responses**:  
   - **Code**: `400 Bad Request`  
     - If `name` is missing or not a string, or `components` is not provided or not an array.  
@@ -402,11 +429,14 @@ http://localhost:<PORT>
 ### POST /user
 
 - **Description**: Creates a new user in the database.  
-- **URL**:  
-  ```
+- **URL**:
+
+  ```html
   POST /user
   ```  
-- **Request Body** (JSON):  
+
+- **Request Body** (JSON):
+
   ```jsonc
   {
     "firstName": "Carol",
@@ -418,6 +448,7 @@ http://localhost:<PORT>
     "manager": "64f8a1e5dcd8a8b570a4284b"           // optional
   }
   ```
+
   - **Required fields**:  
     - `firstName` (_string_)  
     - `lastName` (_string_)  
@@ -430,6 +461,7 @@ http://localhost:<PORT>
 - **Success Response**:  
   - **Code**: `200 OK`  
   - **Content**: The saved `User` document (including `_id`, `createdAt`, `updatedAt`), for example:
+
     ```jsonc
     {
       "_id": "64f8a5b4dcd8a8b570a4284e",
@@ -445,6 +477,7 @@ http://localhost:<PORT>
       "__v": 0
     }
     ```
+
 - **Error Responses**:  
   - **Code**: `400 Bad Request`  
     - If any required field is missing or has the wrong type, or if a conflict (e.g. duplicate email) occurs.  
