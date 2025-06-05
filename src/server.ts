@@ -1,5 +1,9 @@
 import app from './app';
+import { connectDB } from './database/dbconfig';
 
-app.listen(3000, () => {
-  console.log(`Server running on port ${3000}`);
+const port = parseInt(process.env['PORT'] as string) || 3000;
+
+app.listen(3000, async () => {
+  console.log(`Server running on port ${port}`);
+  await connectDB();
 });
