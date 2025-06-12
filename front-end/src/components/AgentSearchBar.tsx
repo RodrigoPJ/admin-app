@@ -44,7 +44,7 @@ export default function AgentSearchBar({
           }}
           onChange={handleDisplayNumberChange}
           displayEmpty
-          inputProps={{ 'aria-label': 'Without label' , 'id':'display-select'}}
+          inputProps={{ 'aria-label': 'Without label', id: 'display-select' }}
         >
           <MenuItem value={10}>10</MenuItem>
           <MenuItem value={20}>20</MenuItem>
@@ -67,13 +67,12 @@ export default function AgentSearchBar({
           type={'text'}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton>
+              <IconButton size='small'>
                 <Visibility />
               </IconButton>
             </InputAdornment>
           }
-          label="Search"
-          
+          placeholder='Search'
           style={{
             height: '1.8rem',
             marginInline: '0.5rem',

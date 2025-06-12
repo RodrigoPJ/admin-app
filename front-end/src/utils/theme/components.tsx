@@ -93,22 +93,7 @@ const MuiButton: Components<MUITheme>["MuiButton"] = {
     disableElevation: true,
   },
 };
-/*
-variant="outlined"
-          color="primary"
-          size="small"
-          sx={{
-            borderRadius: 1.5,
-            bgcolor: "surfaceContainer.main",
-            fontSize: "label.fontSize.medium",
-            lineHeight: 1.1,
-            py: 0.5,
-            [`& .${chipClasses.label}`]: {
-              px: 1,
-            },
-          }}
 
-*/
 const MuiCheckbox: Components<MUITheme>["MuiCheckbox"] = {
   styleOverrides: {
     root: ({ theme }) => ({
@@ -146,36 +131,36 @@ declare module "@mui/material/IconButton" {
     isActive?: boolean;
   }
 }
-const MuiIconButton: Components<MUITheme>["MuiIconButton"] = {
-  variants: [
-    {
-      props: { isActive: true },
-      style: ({ theme }) => ({
-        backgroundColor: theme.vars.palette.surfaceContainerHigh.main,
-        [`& .${svgIconClasses.root}`]: {
-          color: theme.vars.palette.primary.main,
-        },
-        [`&:hover .${svgIconClasses.root}`]: {
-          color: theme.vars.palette.primary.main,
-        },
-        "&:hover": {
-          backgroundColor:
-            "rgba(var(--mui-palette-primary-mainChannel) / calc(var(--mui-palette-action-activatedOpacity) + var(--mui-palette-action-focusOpacity)))",
-        },
-      }),
-    },
-  ],
-};
+// const MuiIconButton: Components<MUITheme>["MuiIconButton"] = {
+//   variants: [
+//     {
+//       props: { isActive: true },
+//       style: ({ theme }) => ({
+//         backgroundColor: theme.vars.palette.surfaceContainerHigh.main,
+//         [`& .${svgIconClasses.root}`]: {
+//           color: theme.vars.palette.primary.main,
+//         },
+//         [`&:hover .${svgIconClasses.root}`]: {
+//           color: theme.vars.palette.primary.main,
+//         },
+//         "&:hover": {
+//           backgroundColor:
+//             "rgba(var(--mui-palette-primary-mainChannel) / calc(var(--mui-palette-action-activatedOpacity) + var(--mui-palette-action-focusOpacity)))",
+//         },
+//       }),
+//     },
+//   ],
+// };
 
-const MuiSvgIcon: Components<MUITheme>["MuiSvgIcon"] = {
-  styleOverrides: {
-    root: ({ theme }) => ({
-      color: theme.vars.palette.onSurfaceVariant.light,
-      width: 16,
-      height: 16,
-    }),
-  },
-};
+// const MuiSvgIcon: Components<MUITheme>["MuiSvgIcon"] = {
+//   styleOverrides: {
+//     root: ({ theme }) => ({
+//       color: theme.vars.palette.onSurfaceVariant.light,
+//       width: 16,
+//       height: 16,
+//     }),
+//   },
+// };
 
 const MuiPaper: Components<MUITheme>["MuiPaper"] = {
   styleOverrides: {
@@ -308,6 +293,6 @@ export default {
   MuiInputBase,
   MuiPagination,
   MuiSelect,
-  MuiSvgIcon,
-  MuiIconButton,
+  // MuiSvgIcon,
+  // MuiIconButton,
 };

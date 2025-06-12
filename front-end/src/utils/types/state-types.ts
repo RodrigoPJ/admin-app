@@ -17,6 +17,6 @@ export interface Agent {
     email: string;
     password: string;
     phone: string;
-    status?: AgentStatus;
+    status: AgentStatus;
     isEditing?: boolean;
 }

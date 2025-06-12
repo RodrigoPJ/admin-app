@@ -22,7 +22,8 @@ export interface AgentSearchBarComponent {
 
 export interface AgentsListComponent {
   agentList: Agent[];
-  handleSaveButton: (index:number)=>void;
+  handleSaveButton: (index:number, changedData:Agent)=>void;
   handleEditButton: (index:number)=>void;
   handleDeleteButton: (index:number)=>void;
+  handleSort: (prop:string)=>void;
 }

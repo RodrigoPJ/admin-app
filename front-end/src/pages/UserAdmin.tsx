@@ -1,13 +1,38 @@
 import { Box, Typography, type SelectChangeEvent } from '@mui/material';
-import { useState, type ChangeEvent } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import AgentSearchBar from '../components/AgentSearchBar';
 import { fakeUsers } from './fakeUsers';
 import AgentsList from '../components/AgentsList';
+import type { Agent } from '../utils/types/state-types';
+import Pagination from '../components/Pagination';
 
 export function UserAdmin() {
   const [displayNumber, setDisplayNumber] = useState(10);
   const [searchText, setSearchText] = useState('');
   const [agentList, setAgentList] = useState(fakeUsers);
+  const [pageNumber, setPageNumber] = useState(1)
+  const searchTime = useRef(0);
+
+  const totalPages = Math.ceil(agentList.length / displayNumber);
+  const listToDisplay = agentList.slice((pageNumber-1)*displayNumber, displayNumber*pageNumber);  
+
+  useEffect(() => {
+    if (searchText) {
+      clearTimeout(searchTime.current);
+      searchTime.current = setTimeout(() => {
+        const filteredList = agentList.filter(
+          (el) =>
+            el.email.toLowerCase().includes(searchText.toLowerCase()) ||
+            (el.firstName + ' ' + el.lastName)
+              .toLowerCase()
+              .includes(searchText.toLowerCase()),
+        );
+        setAgentList(filteredList);
+      }, 1000);
+    } else {
+      setAgentList(fakeUsers);
+    }
+  }, [searchText]);
 
   function handleDisplayNumberChange(ev: SelectChangeEvent<number>) {
     const newNumber =
@@ -15,6 +40,22 @@ export function UserAdmin() {
         ? ev.target.value
         : parseInt(ev.target.value);
     setDisplayNumber(newNumber);
+  }
+
+  function handleSort(prop:string){    
+    if(prop === 'name'){
+      setAgentList(state => {
+        const newState = [...state]
+        newState.sort((a,b) => a.firstName.toLowerCase() < b.firstName.toLowerCase() ? -1 : 1);
+        return newState
+      })
+    } else if(prop === 'status') {
+      setAgentList(state => {
+        const newState = [...state]
+        newState.sort((a,b) => a.status.toLowerCase() < b.status.toLowerCase() ? -1 : 1);
+        return newState
+      })
+    }
   }
 
   function handleEditButton(index: number) {
@@ -38,22 +79,23 @@ export function UserAdmin() {
     setSearchText(ev.target.value);
   }
 
-  function handleSaveButton(index: number) {
+  function handleSaveButton(index: number, changedData: Agent) {
     setAgentList((state) => {
       const newState = [...state];
-      newState[index] = { ...state[index], isEditing: false };
+      newState[index] = { ...state[index], ...changedData, isEditing: false };
       return newState;
     });
   }
 
+  function onPageNumberChange(page: number) {
+    console.log(page);
+    setPageNumber(page);
+    
+  }
+
   return (
     <Box margin={2.5}>
-      <Typography
-        component="p"
-        fontSize="18px"
-        fontWeight={400}
-        color="#303F54"
-      >
+      <Typography component="h2" fontSize="18px" fontWeight={400}>
         Agent Management
       </Typography>
       <AgentSearchBar
@@ -64,11 +106,22 @@ export function UserAdmin() {
         handleSearchChange={handleSearchChange}
       />
       <AgentsList
-        agentList={agentList}
+        agentList={listToDisplay}
         handleDeleteButton={handleDeleteButton}
         handleEditButton={handleEditButton}
         handleSaveButton={handleSaveButton}
+        handleSort={handleSort}
       />
+      <Box display="flex" justifyContent="space-between">
+        <Typography fontSize={'14px'} component="span">
+          Showing {(pageNumber-1)*displayNumber +1} to {displayNumber*pageNumber > agentList.length ?agentList.length : displayNumber*pageNumber} of {agentList.length} entries
+        </Typography>
+        <Pagination
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+          onPageNumberChange={onPageNumberChange}
+        />
+      </Box>
     </Box>
   );
 }

@@ -1,7 +1,7 @@
 import { Box, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import {
-  ManageAccounts as PendingActionsIcon,
+  ManageAccountsOutlined as PendingActionsIcon,
 } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router";
 
@@ -56,10 +56,10 @@ function SideBar() {
       <Box mb={2.5}>
         <IconButton
           onClick={() => navigate("/user-admin")}
-          style={pathname === '/user-admin' ? {backgroundColor: 'rgba(0, 0, 0, 0.08)'} : {}}
+          style={pathname === '/user-admin' ? {backgroundColor: '#5191E926'} : {}}
           sx={{ borderRadius: 2 }}
         >
-          <PendingActionsIcon />
+          <PendingActionsIcon color={'primary'} />
         </IconButton>
       </Box>
       <BottomBlurContainer>
