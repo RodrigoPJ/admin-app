@@ -20,3 +20,14 @@ export interface Agent {
     status: AgentStatus;
     isEditing?: boolean;
 }
+
+export interface FormFocus {
+    lastName: boolean;
+    firstName: boolean;
+    email: boolean;
+    password: boolean;
+    phone: boolean;
+    status: boolean;
+}
+
+export type KeysFormFocus = 'lastName' | 'firstName' | 'email' | 'password' | 'phone' | 'status';

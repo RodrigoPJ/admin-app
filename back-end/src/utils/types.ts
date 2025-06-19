@@ -1,7 +1,13 @@
 export type Roles = 'admin' | 'viewer' | 'editor';
 
 export interface MasterKeyInterface {
-    admin: string[],
+    root: string[],
     viewer: string[],
     editor: string[];
 }
+
+export type SmsAppComponents = 'chats'| 'historical';
+
+export type ApptMgmtCoponents = 'live' | 'historical' | 'dashboard';
+
+export type AdminApp = 'users' | 'roles';

@@ -17,10 +17,10 @@ export function UserAdmin() {
   const listToDisplay = agentList.slice((pageNumber-1)*displayNumber, displayNumber*pageNumber);  
 
   useEffect(() => {
-    if (searchText) {
+    if (searchText) {      
       clearTimeout(searchTime.current);
       searchTime.current = setTimeout(() => {
-        const filteredList = agentList.filter(
+        const filteredList = fakeUsers.filter(
           (el) =>
             el.email.toLowerCase().includes(searchText.toLowerCase()) ||
             (el.firstName + ' ' + el.lastName)
@@ -73,7 +73,22 @@ export function UserAdmin() {
     });
   }
 
-  function handleAddAgent() {}
+  function handleAddAgent() {
+    const newAgent: Agent = {
+      lastName: 'new',
+      firstName: 'Agent',
+      email: 'email',
+      password: '0000',
+      phone: '0000000000',
+      status: 'Inactive',
+      isEditing: true
+    }
+    setAgentList(state =>{
+      const newState = [...state];
+      newState.unshift(newAgent);
+      return newState;
+    });
+  }
 
   function handleSearchChange(ev: ChangeEvent<HTMLInputElement>) {
     setSearchText(ev.target.value);
@@ -88,9 +103,7 @@ export function UserAdmin() {
   }
 
   function onPageNumberChange(page: number) {
-    console.log(page);
     setPageNumber(page);
-    
   }
 
   return (

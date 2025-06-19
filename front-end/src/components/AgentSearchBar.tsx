@@ -9,7 +9,6 @@ import {
   Button,
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Search';
-import Filter from '@mui/icons-material/FilterAltOutlined';
 import type { AgentSearchBarComponent } from '../utils/types/component-types';
 
 export default function AgentSearchBar({
@@ -79,13 +78,6 @@ export default function AgentSearchBar({
             background: '#fff',
           }}
         />
-        <Button
-          style={{ backgroundColor: '#fff', height: '1.8rem' }}
-          variant="outlined"
-          startIcon={<Filter />}
-        >
-          Filter
-        </Button>
         <span
           style={{
             width: '1rem',
