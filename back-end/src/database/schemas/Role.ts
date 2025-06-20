@@ -12,7 +12,7 @@ export const roleSchema = new Schema<IRole>(
   {
     app: { type: String, required: true, trim: true },
     role: { type: String, required: true, trim: true },
-    label: { type: String, required: true, trim: true },
+    label: { type: String, required: true, trim: true, unique: true },
     description: { type: String, required: true, trim: true },
     permissions: { type: [String], required: true, trim: true },
   },

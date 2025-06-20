@@ -1,0 +1,65 @@
+[
+  {
+    "app": "sms",
+    "role": "manager",
+    "label": "sms:manager",
+    "description": "Full control over the SMS App.",
+    "permissions": ["chats", "historical"]
+  },
+  {
+    "app": "sms",
+    "role": "editor",
+    "label": "sms:editor",
+    "description": "Read all messages and edit them in the SMS app",
+    "permissions": ["chats", "historical"]
+  },
+  {
+    "app": "sms",
+    "role": "viewer",
+    "label": "sms:viewer",
+    "description": "Only read access to SMS App.",
+    "permissions": ["chats", "historical"]
+  },
+  {
+    "app": "apptMgmgt",
+    "role": "manager",
+    "label": "apptMgmgt:manager",
+    "description": "Full control over the apptMgmgt App.",
+    "permissions": ["live", "historical", "dashboard"]
+  },
+  {
+    "app": "apptMgmgt",
+    "role": "editor",
+    "label": "apptMgmgt:editor",
+    "description": "Check all appointments and edit them in the apptMgmgt app",
+    "permissions": ["live", "historical", "dashboard"]
+  },
+  {
+    "app": "apptMgmgt",
+    "role": "viewer",
+    "label": "apptMgmgt:viewer",
+    "description": "Only read access to apptMgmgt App.",
+    "permissions": ["live", "historical", "dashboard"]
+  },
+  {
+    "app": "admin",
+    "role": "manager",
+    "label": "admin:manager",
+    "description": "Full control over the admin App.",
+    "permissions": ["users", "roles"]
+  },
+  {
+    "app": "admin",
+    "role": "editor",
+    "label": "admin:editor",
+    "description": "Check all appointments and edit them in the admin app",
+    "permissions": ["users", "roles"]
+  },
+  {
+    "app": "admin",
+    "role": "viewer",
+    "label": "admin:viewer",
+    "description": "Only read access to admin App.",
+    "permissions": ["users", "roles"]
+  }
+]
